@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Tic Tac Toe</title>
+<style>
+	body {
+		color: white;
+		font-size: 40px;
+		text-align: center;
+		font-family: arial;
+	}
+	div div {
+		width: 100px;
+		height: 100px;
+		background: purple;
+		float: left;
+		border-radius: 10px;
+		margin: 10px;
+		padding: 10px;
+	}
+	.clearRow {
+		clear: both;
+	}
+</style>
+<script src="js/angular.min.js"></script>
+</head>
+<body x-ng-app="" x-ng-init="rows = [[X,X,X],[X,X,X],[X,X,X]];">
+			<div class="clearRow" x-ng-repeat="row in rows track by $index">
+				<div x-ng-repeat="col in row track by $index" x-ng-click="rows[$parent.$index][$index] = 'X';" class="cell">{{col}}</div>
+			</div>
+</body>
+</html>
