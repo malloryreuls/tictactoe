@@ -1,0 +1,29 @@
+body {
+}
+
+#container {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 80px;
+	width: 345px;
+	height: 345px;
+}
+
+h1 {
+	font-size: 40px;
+	color: white;
+	margin-top: 80px;
+	font-family: ;
+}
+
+.cell {
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin: 2px;
+	background: yellow;
+	border: 5px solid white;
+	border-radius: 20px;
+	font-size: 87px;
+	clear: both;
+}

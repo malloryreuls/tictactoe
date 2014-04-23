@@ -1,0 +1,44 @@
+body {
+		background: black;
+		color: white;
+		font-size: 84px;
+		margin: 0 auto;
+		text-align: center;
+		font-family: helvetica;
+	}
+
+#container {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+	width: 345px;
+	height: 345px;
+}
+#container h1 {
+	font-size: 50px;
+	font-weight: lighter;
+}
+.cell {
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin: 2px;
+	background: yellow;
+	border: 5px solid white;
+	border-radius: 20px;
+	font-size: 87px;
+	color: black;
+}
+
+.clearRow {
+		clear: both;
+	}
+
+#result {
+	display: none;
+	font-size: 25px;
+	margin-top: 20px;
+}
+
+
+

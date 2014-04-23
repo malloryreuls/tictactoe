@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html x-ng-app="tttApp">
+  <head>
+    <title>ttt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+
+  <body x-ng-controller="tttController" x-ng-init="rows = [[0,0,0],[0,0,0],[0,0,0]]">
+
+        <h1>TIC TAC TOE</h1>
+        
+           <div class="cell" x-ng-repeat="x in rows track by $index">
+
+           <div class="board" x-ng-repeat="col in x track by $index" x-ng-click="playerTurn($parent.$index, $index);">{{ ((col == 1)?"X" : ( col == -1?"O") ) }}</div>
+
+  </body>
+</html>

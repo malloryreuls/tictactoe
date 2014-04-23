@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html x-ng-app="tttApp">
+<head>
+	<title>Tic Tac Toe</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/angular.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body x-ng-controller="tttController">
+	<div id="container">
+			<h1>TIC TAC TOE</h1>
+			<div class="cell" x-ng-repeat="c in cells track by $index" x-ng-click="makeMove($index);">{{c}}</div>
+			<div class="clearRow"></div>
+			<div id="result"></div>
+	</div>
+</body>
+</html>
