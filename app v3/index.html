@@ -13,6 +13,7 @@
 			<div class="cell" x-ng-repeat="c in cells track by $index" x-ng-click="makeMove($index);">{{c}}</div>
 			<div class="clearRow"></div>
 			<div id="result"></div>
+			<button type="button" onClick="history.go(0)">REPLAY</button>
 	</div>
 </body>
 </html>
