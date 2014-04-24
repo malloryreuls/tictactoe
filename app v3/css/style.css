@@ -10,13 +10,34 @@ body {
 #container {
 	margin: 0 auto;
 	text-align: center;
-	margin-top: 50px;
-	width: 345px;
-	height: 345px;
+	width: 960px;
+	margin-top: 20px;
+	margin-bottom: 100px;
+	float: left;
 }
+
 #container h1 {
 	font-size: 50px;
 	font-weight: lighter;
+}
+
+#playerOne {
+	font-size: 20px;
+	float: left;
+	margin-left: 100px;
+	color: white;
+}
+
+#playerTwo {
+	font-size: 20px;
+	float: right;
+	margin-right: 100px;
+}
+#gameboard {
+	width: 345px;
+	height: 345px;
+	margin: 0 auto;
+	text-align: center;
 }
 .cell {
 	width: 100px;
