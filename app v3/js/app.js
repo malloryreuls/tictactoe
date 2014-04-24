@@ -30,62 +30,44 @@ tttApp.controller('tttController', function ($scope) {
 	}
 	};
 
-	$scope.winFunction = function() {
+	var isWinCombo = function(cell1, cell2, cell3, player) {
+		if (($scope.cells[cell1] === player) &&
+		    ($scope.cells[cell2] === player) && 
+		    ($scope.cells[cell3] === player)) {
+		   	return true;
+		} else {
+		   	return false;
+		}
+	};
 
-		if (($scope.cells[0] === "X") && ($scope.cells[1] === "X") && ($scope.cells[2] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[3] === "X") && ($scope.cells[4] === "X") && ($scope.cells[5] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[6] === "X") && ($scope.cells[7] === "X") && ($scope.cells[8] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[0] === "X") && ($scope.cells[3] === "X") && ($scope.cells[6] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[1] === "X") && ($scope.cells[4] === "X") && ($scope.cells[7] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[2] === "X") && ($scope.cells[5] === "X") && ($scope.cells[8] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[0] === "X") && ($scope.cells[4] === "X") && ($scope.cells[8] === "X")) {
-			showMessage("X");
-		}
-			else if (($scope.cells[2] === "X") && ($scope.cells[4] === "X") && ($scope.cells[6] === "X")) {
-			showMessage("X");
-		}
-			
-			else if (($scope.cells[0] === "O") && ($scope.cells[1] === "O") && ($scope.cells[2] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[3] === "O") && ($scope.cells[4] === "O") && ($scope.cells[5] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[6] === "O") && ($scope.cells[7] === "O") && ($scope.cells[8] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[0] === "O") && ($scope.cells[3] === "O") && ($scope.cells[6] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[1] === "O") && ($scope.cells[4] === "O") && ($scope.cells[7] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[2] === "O") && ($scope.cells[5] === "O") && ($scope.cells[8] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[0] === "O") && ($scope.cells[4] === "O") && ($scope.cells[8] === "O")) {
-			showMessage("O");
-		}
-			else if (($scope.cells[2] === "O") && ($scope.cells[4] === "O") && ($scope.cells[6] === "O")) {
-			showMessage("O");
-		}
-			else if (clickedSpaces === 9) {
+	$scope.winFunction = function() {
+		if  (isWinCombo(0, 1, 2, "X") ||
+			isWinCombo(3, 4, 5, "X") || 
+			isWinCombo(6, 7, 8, "X") ||
+			isWinCombo(0, 3, 6, "X") ||
+			isWinCombo(1, 4, 7, "X") || 
+			isWinCombo(2, 5, 8, "X") ||
+			isWinCombo(0, 4, 8, "X") ||
+			isWinCombo(2, 4, 6, "X")) {
+			showMessage("X")
+		} 
+
+		else if  (isWinCombo(0, 1, 2, "O") ||
+			isWinCombo(3, 4, 5, "O") || 
+			isWinCombo(6, 7, 8, "O") ||
+			isWinCombo(0, 3, 6, "O") ||
+			isWinCombo(1, 4, 7, "O") || 
+			isWinCombo(2, 5, 8, "O") ||
+			isWinCombo(0, 4, 8, "O") ||
+			isWinCombo(2, 4, 6, "O")) {
+			showMessage("O")
+		} 
+
+		else if (clickedSpaces === 9) {
 			showMessage("Z");
 			 }
 			};
-
+		
 	$scope.clearBoard = function () {
 		$scope.cells = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 		gameStatus = true;
