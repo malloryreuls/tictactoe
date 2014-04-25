@@ -1,39 +1,78 @@
-var tttApp = angular.module ('tttApp', []);
-// What do those brackets do??! Dependencies.  (put a service or factory name in here)
-tttApp.controller('tttController', function ($scope) {
-	$scope.cells = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+var tttApp = angular.module ('tttApp', ["firebase"]);
+// Dependencies.  (put a service or factory name in here)
+tttApp.controller('tttController', function ($scope, $firebase) {
+
 	var gameStatus = true;
 	var clickedSpaces = 0;
 	$scope.playerOneScore = 0;
 	$scope.playerTwoScore = 0;
+	$scope.isXTurn = true;
+
+	var ticTacRef = new Firebase("https://malloryapp.firebaseio.com/games");
+		var player1;
+		ticTacRef.once("value", function(data) {
+		var lastGame;
+		console.log(lastGame);
+		var games = data.val(); 
+		if (games != null)
+		{
+			console.log(games);
+			var keys = Object.keys(games); // Get all the text keys
+			var lastKey = keys[keys.length -1]; // Find the last key
+			var lastGame = games[lastKey]; // use the last key to get the last game object
+
+			if(lastGame.waiting==true) {
+				lastGame = ticTacRef.child(lastKey);
+				lastGame.set({waiting: false, gameStatus: false, isXTurn: true, cells: [{value:' '},{value:' '},{value:' '},{value:' '},{value:' '},{value:' '},{value:' '},{value:' '},{value:' '}]} );
+				player1 = false;
+			}
+			else 
+			{
+				lastGame = ticTacRef.push({waiting: true});
+				player1 = true;
+			}
+		}
+		else 
+		{
+		lastGame = ticTacRef.push({waiting: true});;
+		player1 = true;
+		}
+		$scope.game = $firebase(lastGame);
+		console.log(lastGame);
+	});
+
+	// $scope.game.cells = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 	// $scope.winCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
 	// we are saying the first move defaults to X because isXTurn = true here
 
-	$scope.isXTurn = true;
+	
 	//the makeMove function calls for (clickedOnindex) which is represented in the html with $index. Because  it changees dynamically based on where the user clicks
 	
 	$scope.makeMove = function (clickedOnindex) {
 		console.log(clickedOnindex, gameStatus);
-	//$scope.cells[clickedOnindex] = $scope.isXTurn?"X":"O" - this basically asks if XTurn is true mark X if it is not true mark with O
+	//$scope.game.cells[clickedOnindex] = $scope.isXTurn?"X":"O" - this basically asks if XTurn is true mark X if it is not true mark with O
 		if (gameStatus == true) {
 			// this basically says if the cell is blank alternate between X and O
 			// if the cell is filled no not run this function.
-			if ($scope.cells[clickedOnindex] === " ") {
-		$scope.cells[clickedOnindex] = $scope.isXTurn?"X":"O";
+			if ($scope.game.cells[clickedOnindex].value === " ") {
+		$scope.game.cells[clickedOnindex].value = $scope.isXTurn?"X":"O";
 	//this function flips the switch! So if it just marked with an X then the next one will be an O
 	// if it just marked with an O it will switch back to X!
 		$scope.isXTurn = !$scope.isXTurn;
+		console.log($scope.game.cells);
 		clickedSpaces++;
 		$scope.winFunction();
 	}
 	}
+		$scope.game.$save();
 	};
+	
 
 	var isWinCombo = function(cell1, cell2, cell3, player) {
-		if (($scope.cells[cell1] === player) &&
-		    ($scope.cells[cell2] === player) && 
-		    ($scope.cells[cell3] === player)) {
+		if (($scope.game.cells[cell1].value === player) &&
+		    ($scope.game.cells[cell2].value === player) && 
+		    ($scope.game.cells[cell3].value === player)) {
 		   	return true;
 		} else {
 		   	return false;
@@ -65,11 +104,11 @@ tttApp.controller('tttController', function ($scope) {
 
 		else if (clickedSpaces === 9) {
 			showMessage("Z");
-			 }
-			};
+		}
+	};
 		
 	$scope.clearBoard = function () {
-		$scope.cells = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+		$scope.game.cells = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 		gameStatus = true;
 		clickedSpaces = 0;
 		$scope.isXTurn = true;
