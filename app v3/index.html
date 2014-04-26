@@ -16,18 +16,18 @@
 			<div id="playerOne">
 				<p>Player One Score:</p> 
 				<p>{{game.waiting}}</p>
-				<p x-ng-bind="playerOneScore"></p>
+				<p x-ng-bind="game.playerOneScore"></p>
 			</div>
 			<div id="playerTwo">
 				<p>Player Two Score:</p>
-				<p x-ng-bind="playerTwoScore"></p>
+				<p x-ng-bind="game.playerTwoScore"></p>
 			</div>
 			<div id="gameboard">
-				<div class="cell" x-ng-repeat="c in game.cells track by $index" x-ng-click="makeMove($index);">{{c.value}}</div>
+				<div class="cell" x-ng-repeat="c in game.cells track by $index" x-ng-click="makeMove($index);">{{c}}</div>
 				<div class="clearRow"></div>
 				<div id="result"></div>
-				<button type="button" x-ng-click="clearBoard()">clear board</button>
-				<button type="button" x-ng-click="clearScore()">clear score</button>
+				<button type="button" x-ng-click="game.clearBoard()">clear board</button>
+				<button type="button" x-ng-click="game.clearScore()">clear score</button>
 			</div>
 			
 			<div class="clearRow"></div>
