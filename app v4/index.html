@@ -24,7 +24,7 @@
 			<div id="gameboard">
 				<div class="cell" x-ng-repeat="c in game.cells track by $index" x-ng-click="makeMove($index);">{{c}}</div>
 				<div class="clearRow"></div>
-				<div id="result"></div>
+				<div id="result">{{game.message}}</div>
 				<button type="button" x-ng-click="clearBoard()">clear board</button>
 				<button type="button" x-ng-click="clearScore()">clear score</button>
 			</div>
